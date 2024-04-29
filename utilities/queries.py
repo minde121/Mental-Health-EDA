@@ -1,16 +1,15 @@
-import sqlite3
 import pandas as pd
-
-
-conn = sqlite3.connect('Datasets/mental_health.sqlite')
-cursor = conn.cursor()
+from utilities import database_utils as dbu
 
 
 def execute_query(query):
+    conn = dbu.create_connection()
+    cursor = conn.cursor()
     cursor.execute(query)
     rows = cursor.fetchall()
     columns = [col[0] for col in cursor.description]
     df = pd.DataFrame(rows, columns=columns)
+    dbu.close_connection(conn)
     return df
 
 
@@ -162,3 +161,4 @@ def survey_question_yes_no_query(question_id):
         SurveyID;
     """
     return execute_query(query)
+
