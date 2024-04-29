@@ -162,3 +162,35 @@ def survey_question_yes_no_query(question_id):
     """
     return execute_query(query)
 
+
+def count_total_distinct_users():
+    query = """
+    SELECT DISTINCT UserID
+    FROM Answer
+    WHERE SurveyID != 2014;
+    """
+    return execute_query(query)
+
+
+def find_open_and_ill():
+    query = """
+    SELECT DISTINCT a1.UserID , a1.SurveyID
+    FROM Answer a1
+    JOIN Answer a2 ON a1.UserID = a2.UserID
+    WHERE
+    (a1.QuestionID IN (32, 33, 34) AND LOWER(TRIM(a1.AnswerText)) = 'yes') AND
+    (a2.QuestionID IN (12, 18, 19, 53) AND LOWER(TRIM(a2.AnswerText)) = 'yes');
+    """
+    return execute_query(query)
+
+
+def find_open_not_ill():
+    query = """
+    SELECT DISTINCT a1.UserID, a1.SurveyID
+    FROM Answer a1
+    JOIN Answer a2 ON a1.UserID = a2.UserID
+    WHERE
+    (a1.QuestionID IN (32, 33, 34) AND LOWER(TRIM(a1.AnswerText)) = 'no') AND
+    (a2.QuestionID IN (12, 18, 19, 53) AND LOWER(TRIM(a2.AnswerText)) = 'yes');
+    """
+    return execute_query(query)
