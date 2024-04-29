@@ -189,3 +189,192 @@ def mental_history_query():
     columns = [col[0] for col in cursor.description]
     df = pd.DataFrame(rows, columns=columns)
     return df
+
+
+def treated_by_proffesional_query():
+    query = """
+    SELECT
+        SurveyID,
+        SUM(CASE WHEN AnswerText = '1' THEN 1 ELSE 0 END) AS Yes_Count,
+        COUNT(*) AS Total_Answers_Q7
+    FROM
+        Answer
+    WHERE
+        SurveyID != 2014 AND QuestionID = 7
+    GROUP BY
+        SurveyID;
+    """
+
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    columns = [col[0] for col in cursor.description]
+    df = pd.DataFrame(rows, columns=columns)
+    return df
+
+
+def openess_during_jobhunt_query():
+    query = """
+    SELECT
+        SurveyID,
+        COUNT(*) AS Total_Answers_Q12,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'yes' THEN 1 ELSE 0 END) AS Yes_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'no' THEN 1 ELSE 0 END) AS No_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) NOT IN ('yes', 'no') THEN 1 ELSE 0 END) AS Other_Count
+    FROM
+        Answer
+    WHERE
+        QuestionID = 12
+        AND SurveyID != 2014
+    GROUP BY
+        SurveyID;
+    """
+
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    columns = [col[0] for col in cursor.description]
+    df = pd.DataFrame(rows, columns=columns)
+    return df
+
+
+def openess_with_coworkers_query():
+    query = """
+    SELECT
+        SurveyID,
+        COUNT(*) AS Total_Answers_Q18,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'yes' THEN 1 ELSE 0 END) AS Yes_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'no' THEN 1 ELSE 0 END) AS No_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) NOT IN ('yes', 'no') THEN 1 ELSE 0 END) AS Other_Count
+    FROM
+        Answer
+    WHERE
+        QuestionID = 18
+        AND SurveyID != 2014
+    GROUP BY
+        SurveyID;
+    """
+
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    columns = [col[0] for col in cursor.description]
+    df = pd.DataFrame(rows, columns=columns)
+    return df
+
+
+def openess_with_superior_query():
+    query = """
+    SELECT
+        SurveyID,
+        COUNT(*) AS Total_Answers_Q19,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'yes' THEN 1 ELSE 0 END) AS Yes_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'no' THEN 1 ELSE 0 END) AS No_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) NOT IN ('yes', 'no') THEN 1 ELSE 0 END) AS Other_Count
+    FROM
+        Answer
+    WHERE
+        QuestionID = 19
+        AND SurveyID != 2014
+    GROUP BY
+        SurveyID;
+    """
+
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    columns = [col[0] for col in cursor.description]
+    df = pd.DataFrame(rows, columns=columns)
+    return df
+
+
+def past_ilness_query():
+    query = """
+    SELECT
+        SurveyID,
+        COUNT(*) AS Total_Answers_Q32,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'yes' THEN 1 ELSE 0 END) AS Yes_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'no' THEN 1 ELSE 0 END) AS No_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) NOT IN ('yes', 'no') THEN 1 ELSE 0 END) AS Other_Count
+    FROM
+        Answer
+    WHERE
+        QuestionID = 32
+        AND SurveyID != 2014
+    GROUP BY
+        SurveyID;
+    """
+
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    columns = [col[0] for col in cursor.description]
+    df = pd.DataFrame(rows, columns=columns)
+    return df
+
+
+def current_ilness_query():
+    query = """
+    SELECT
+        SurveyID,
+        COUNT(*) AS Total_Answers_Q33,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'yes' THEN 1 ELSE 0 END) AS Yes_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'no' THEN 1 ELSE 0 END) AS No_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) NOT IN ('yes', 'no') THEN 1 ELSE 0 END) AS Other_Count
+    FROM
+        Answer
+    WHERE
+        QuestionID = 33
+        AND SurveyID != 2014
+    GROUP BY
+        SurveyID;
+    """
+
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    columns = [col[0] for col in cursor.description]
+    df = pd.DataFrame(rows, columns=columns)
+    return df
+
+
+def ever_ilness_query():
+    query = """
+    SELECT
+        SurveyID,
+        COUNT(*) AS Total_Answers_Q34,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'yes' THEN 1 ELSE 0 END) AS Yes_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'no' THEN 1 ELSE 0 END) AS No_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) NOT IN ('yes', 'no') THEN 1 ELSE 0 END) AS Other_Count
+    FROM
+        Answer
+    WHERE
+        QuestionID = 34
+        AND SurveyID != 2014
+    GROUP BY
+        SurveyID;
+    """
+
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    columns = [col[0] for col in cursor.description]
+    df = pd.DataFrame(rows, columns=columns)
+    return df
+
+
+def openess_with_client_query():
+    query = """
+    SELECT
+        SurveyID,
+        COUNT(*) AS Total_Answers_Q53,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'yes' THEN 1 ELSE 0 END) AS Yes_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) = 'no' THEN 1 ELSE 0 END) AS No_Count,
+        SUM(CASE WHEN LOWER(TRIM(AnswerText)) NOT IN ('yes', 'no') THEN 1 ELSE 0 END) AS Other_Count
+    FROM
+        Answer
+    WHERE
+        QuestionID = 53
+        AND SurveyID != 2014
+    GROUP BY
+        SurveyID;
+    """
+
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    columns = [col[0] for col in cursor.description]
+    df = pd.DataFrame(rows, columns=columns)
+    return df
